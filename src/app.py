@@ -28,8 +28,8 @@ class PmpBot:
         cur_btc = float(self.__tradeApiClient.get_info()["return"]["funds"]["btc"])
 
         status = "fail"
-        while cur_btc > 0 and cur_ask_rate < 3 * self.initialAskRate:
-            make_order_res = self.__tradeApiClient.trade(self.tradePair, "buy", ':8f'.format(cur_ask_rate), ':8f'.format(cur_btc * 100 / 102 / cur_ask_rate))
+        while cur_btc > 0.001 and cur_ask_rate < 3 * self.initialAskRate:
+            make_order_res = self.__tradeApiClient.trade(self.tradePair, "buy", '{:.8f}'.format(cur_ask_rate), '{:.8f}'.format(cur_btc * 100 / 102 / cur_ask_rate))
             success = True if make_order_res["success"] == 1 else False
 
             if success:
